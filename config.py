@@ -9,4 +9,7 @@ class AppConfig:
 
         self.GOOGLE_API_KEY = os.getenv("GEMINI_API_KEY")
 
-        self.GEMINI_MODEL = "gemini-2.5-flash"
+        self.GEMINI_MODEL = os.getenv(
+            "GEMINI_MODEL",
+            "gemini-2.0-flash"
+        )
