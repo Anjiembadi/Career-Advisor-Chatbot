@@ -6,6 +6,11 @@ from logger import setup_logger
 logger = setup_logger()
 config = AppConfig()
 
+# TEMP DEBUG
+st.write(config.GOOGLE_API_KEY[:10])
+st.write(config.GEMINI_MODEL)
+
+
 st.set_page_config(
     page_title="Career Advisor Chatbot",
     page_icon="💼",
