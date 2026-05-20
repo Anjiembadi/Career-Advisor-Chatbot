@@ -43,3 +43,17 @@ Special Focus Areas:
 
 Your goal is to act like a real professional career mentor and help users become job-ready with confidence.
 """
+    @staticmethod
+    def build_prompt(user_input, history_text=""):
+        return f"""
+{CareerAdvisorPrompts.SYSTEM_PROMPT}
+
+Conversation History:
+{history_text}
+
+User Question:
+{user_input}
+
+Answer:
+"""
+

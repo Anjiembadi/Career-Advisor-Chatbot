@@ -13,64 +13,45 @@ st.set_page_config(
 )
 
 st.title("💼 Career Advisor Chatbot")
-st.write(
-    "Ask me about careers, resumes, interviews, skills, and learning roadmaps."
-)
-
-# Small UI improvement
-st.markdown("""
-<style>
-.stChatInput input {
-    font-size: 18px;
-}
-</style>
-""", unsafe_allow_html=True)
+st.write("Ask me about careers, resumes, interviews, skills, and learning roadmaps.")
 
 client = GeminiClient(config)
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Display previous chats
 for message in st.session_state.messages:
-
     with st.chat_message(message["role"]):
         st.write(message["content"])
 
-# Chat input
-user_input = st.chat_input(
-    "Ask your career question..."
-)
+user_input = st.chat_input("Ask your career question...")
 
 if user_input:
 
-    # Store user message
     st.session_state.messages.append({
         "role": "user",
         "content": user_input
     })
 
-    # Display user message
     with st.chat_message("user"):
         st.write(user_input)
 
-    # Generate assistant response
     with st.chat_message("assistant"):
+        response_placeholder = st.empty()
+        full_response = ""
 
         with st.spinner("Thinking..."):
-
-            response = client.get_response(
+            for chunk in client.get_response_stream(
                 user_input,
                 st.session_state.messages
-            )
+            ):
+                full_response += chunk
+                response_placeholder.markdown(full_response)
 
-            st.write(response)
-
-    # Store assistant response
     st.session_state.messages.append({
         "role": "assistant",
-        "content": response
+        "content": full_response
     })
 
     logger.info(f"User: {user_input}")
-    logger.info(f"Bot: {response}")
+    logger.info(f"Bot: {full_response}")
