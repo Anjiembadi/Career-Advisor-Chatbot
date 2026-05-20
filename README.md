@@ -1,60 +1,113 @@
 # 💼 Career Advisor Chatbot
 
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
+![Google Gemini](https://img.shields.io/badge/Google-Gemini-orange)
+![Generative AI](https://img.shields.io/badge/Generative-AI-green)
+
 An AI-powered Career Advisor Chatbot built using **Google Gemini GenAI API** and **Streamlit**.
 
-This chatbot helps students, freshers, and early-career professionals with career guidance, resume improvement, interview preparation, skill roadmaps, and job role suggestions.
+This chatbot helps students, freshers, and early-career professionals with:
+
+* Career Guidance
+* Resume Improvement
+* Interview Preparation
+* Skill Roadmaps
+* Learning Suggestions
+* Job Role Recommendations
 
 ---
 
-## 📌 Project Overview
+# 🌐 Live Demo
 
-The main goal of this project is to build a **multi-turn conversational chatbot** for the career guidance domain.
+🔗 Live App:
+https://career-advisor-chatbot-anji-embadi.streamlit.app/
 
-Instead of creating a simple chatbot demo, this project follows a modular and production-style structure where API logic, configuration, prompts, logging, and UI are separated into different files.
-
----
-
-## 🎯 Domain Selected
-
-### Career Advisor Chatbot
-
-The chatbot can help users with:
-
-- Career guidance
-- Resume improvement
-- Interview preparation
-- Skill roadmaps
-- Job role suggestions
-- Learning path planning
-- Fresher job preparation
+🔗 GitHub Repository:
+https://github.com/Anjiembadi/Career-Advisor-Chatbot
 
 ---
 
-## 🚀 Features
+# 📌 Project Overview
 
-- Gemini API integration
-- Secure API key management using `.env`
-- Streamlit chat-style interface
-- Multi-turn conversation history
-- Structured career guidance responses
-- Prompt engineering using system prompts
-- Error handling
-- Logging of user questions and bot responses
-- Modular project structure
+The main goal of this project is to build a **production-style multi-turn conversational chatbot** for career guidance using **Generative AI**.
 
----
+Instead of creating a basic chatbot demo, this project follows a modular AI engineering architecture where:
 
-## 🛠️ Tech Stack
+* API logic
+* prompts
+* configuration
+* logging
+* UI
 
-- Python
-- Streamlit
-- Google Gemini API
-- python-dotenv
-- Logging module
+are separated into different files for scalability and maintainability.
 
 ---
 
-## 📂 Project Structure
+# 🎯 Domain Selected
+
+## Career Advisor Chatbot
+
+The chatbot provides guidance related to:
+
+* Career planning
+* Resume building
+* Interview preparation
+* AI/ML/Data Analyst roadmaps
+* Skill recommendations
+* Fresher job preparation
+* Learning paths
+
+---
+
+# 🚀 Features
+
+* Gemini API integration
+* Secure API key management using `.env`
+* Streamlit chat-style UI
+* Multi-turn conversation support
+* Conversation history handling
+* Context window trimming
+* Streaming AI responses
+* Prompt engineering using reusable prompts
+* Exception handling and fallback responses
+* Logging system
+* Modular production-style architecture
+
+---
+
+# 🛠️ Tech Stack
+
+* Python
+* Streamlit
+* Google Gemini API
+* python-dotenv
+* Logging Module
+* Git & GitHub
+
+---
+
+# 🏗️ Project Architecture
+
+```text
+User
+   ↓
+Streamlit UI (app.py)
+   ↓
+Gemini Client (gemini_client.py)
+   ↓
+Prompt Builder (prompts.py)
+   ↓
+Google Gemini API
+   ↓
+AI Response
+   ↓
+Streamlit Chat Interface
+```
+
+---
+
+# 📂 Project Structure
 
 ```text
 career_chatbot/
@@ -65,6 +118,7 @@ career_chatbot/
 ├── prompts.py
 ├── logger.py
 ├── requirements.txt
+├── runtime.txt
 ├── .gitignore
 ├── README.md
 └── images/
@@ -114,24 +168,24 @@ We installed the required Python libraries:
 pip install streamlit google-generativeai python-dotenv
 ```
 
-These libraries are used for:
+Libraries used:
 
-- `streamlit` → building the chatbot UI
-- `google-generativeai` → connecting with Gemini API
-- `python-dotenv` → loading API key securely from `.env`
+* `streamlit` → chatbot UI
+* `google-generativeai` → Gemini API integration
+* `python-dotenv` → secure environment variable handling
 
 ---
 
 ## Step 4: Created `.env` File
 
-We created a `.env` file to store the Gemini API key securely.
+We securely stored API credentials inside `.env`.
 
 ```text
 GEMINI_API_KEY=your_api_key_here
 GEMINI_MODEL=gemini-2.0-flash
 ```
 
-This keeps the API key hidden from the main code.
+This prevents exposing secret keys inside the codebase.
 
 ---
 
@@ -139,55 +193,52 @@ This keeps the API key hidden from the main code.
 
 The `config.py` file loads environment variables from `.env`.
 
-It stores:
+Responsibilities:
 
-- Gemini API key
-- Gemini model name
-
-This helps avoid hardcoding sensitive information inside the code.
+* Load Gemini API key
+* Load Gemini model dynamically
+* Centralize configuration settings
 
 ---
 
 ## Step 6: Created `prompts.py`
 
-The `prompts.py` file contains the system prompt.
+The `prompts.py` file stores reusable system prompts.
 
-This prompt tells the chatbot how to behave as a professional Career Advisor.
+This prompt instructs the chatbot to:
 
-It includes rules like:
-
-- give career guidance
-- keep answers professional
-- use simple language
-- focus on freshers and students
-- provide practical suggestions
+* behave like a professional career advisor
+* provide concise responses
+* focus on freshers/students
+* generate structured career guidance
 
 ---
 
 ## Step 7: Created `gemini_client.py`
 
-The `gemini_client.py` file handles Gemini API communication.
+The `gemini_client.py` file handles all Gemini API communication.
 
-It is responsible for:
+Responsibilities:
 
-- sending user questions to Gemini
-- receiving AI-generated responses
-- handling API errors
-- keeping API logic separate from UI code
+* Send prompts to Gemini
+* Receive AI-generated responses
+* Handle exceptions
+* Stream AI responses in real time
+* Trim old conversation history for context optimization
 
 ---
 
 ## Step 8: Created `logger.py`
 
-The `logger.py` file handles logging.
+The `logger.py` file handles application logging.
 
 It records:
 
-- user questions
-- chatbot responses
-- errors
+* user questions
+* chatbot responses
+* errors and exceptions
 
-This is useful for debugging and monitoring the chatbot.
+This helps in debugging and monitoring.
 
 ---
 
@@ -195,17 +246,15 @@ This is useful for debugging and monitoring the chatbot.
 
 The `app.py` file is the main Streamlit application.
 
-It handles:
+It manages:
 
-- chatbot title
-- chat input box
-- user messages
-- assistant messages
-- conversation history
-- loading spinner
-- displaying responses
-
-This file connects the UI with the Gemini client.
+* Streamlit UI
+* Chat interface
+* User input
+* Assistant responses
+* Conversation history
+* Loading spinner
+* Real-time response rendering
 
 ---
 
@@ -217,13 +266,46 @@ We used:
 st.session_state.messages
 ```
 
-to store chat history.
+to maintain conversation history.
 
-This allows the chatbot to show previous user and assistant messages during the session.
+This allows the chatbot to remember previous messages during the session.
 
 ---
 
-## Step 11: Ran the Application
+## Step 11: Added Context Window Trimming
+
+To prevent sending excessively large chat history to Gemini API:
+
+* older messages are trimmed
+* only recent conversation history is sent
+
+This improves:
+
+* performance
+* token efficiency
+* response speed
+
+---
+
+## Step 12: Added Streaming Responses
+
+We enabled:
+
+```python
+stream=True
+```
+
+inside `generate_content()`.
+
+This allows:
+
+* real-time AI response rendering
+* better user experience
+* modern chatbot behavior
+
+---
+
+## Step 13: Ran the Application
 
 We ran the chatbot using:
 
@@ -231,20 +313,21 @@ We ran the chatbot using:
 streamlit run app.py
 ```
 
-The app opens in the browser and allows users to ask career-related questions.
+The application opens in the browser and allows users to interact with the AI chatbot.
 
 ---
 
-## Step 12: Prepared GitHub Files
+## Step 14: Prepared GitHub Repository
 
 We added:
 
-- `README.md`
-- `.gitignore`
-- `requirements.txt`
-- screenshots inside `images/`
+* `README.md`
+* `.gitignore`
+* `requirements.txt`
+* screenshots
+* deployment-ready files
 
-We also excluded sensitive and unnecessary files like:
+Excluded files:
 
 ```text
 .env
@@ -257,13 +340,13 @@ __pycache__/
 
 # 📸 Project Screenshots
 
-## Input Screen
+## 🖥️ User Input Interface
 
 ![Input Screen](images/input.png)
 
 ---
 
-## Output Screen
+## 🤖 AI Generated Career Guidance Response
 
 ![Output Screen](images/output.png)
 
@@ -282,7 +365,7 @@ What skills are needed for AI/ML Engineer fresher?
 ```
 
 ```text
-How should I answer Tell me about yourself?
+How should I answer "Tell me about yourself"?
 ```
 
 ```text
@@ -293,11 +376,11 @@ Create a 30-day roadmap for learning Python and SQL.
 
 # ▶️ How to Run the Project
 
-## 1. Clone the Repository
+## 1. Clone Repository
 
 ```bash
-git clone YOUR_GITHUB_LINK
-cd career_chatbot
+git clone https://github.com/Anjiembadi/Career-Advisor-Chatbot.git
+cd Career-Advisor-Chatbot
 ```
 
 ---
@@ -311,6 +394,8 @@ python -m venv venv
 ---
 
 ## 3. Activate Virtual Environment
+
+### Windows
 
 ```bash
 venv\Scripts\activate
@@ -345,20 +430,21 @@ streamlit run app.py
 
 # 🔐 Security
 
-The API key is stored in the `.env` file and excluded from GitHub using `.gitignore`.
+Sensitive credentials are stored inside `.env` and excluded from GitHub using `.gitignore`.
 
-This prevents the secret key from being exposed publicly.
+This prevents accidental exposure of API keys.
 
 ---
 
 # 📌 Future Improvements
 
-- Add resume upload feature
-- Add job role recommendation
-- Add PDF resume analyzer
-- Store chat history in database
-- Deploy on Streamlit Cloud
-- Add voice input support
+* Resume upload and analysis
+* PDF resume parser
+* Job recommendation system
+* Database-based chat persistence
+* Voice-enabled chatbot
+* Authentication system
+* Personalized career tracking
 
 ---
 
@@ -366,5 +452,14 @@ This prevents the secret key from being exposed publicly.
 
 ## Embadi Anji
 
-- Data Analyst / AI-ML Aspirant
-- Python | SQL | Power BI | Machine Learning | GenAI
+Data Analyst / AI-ML Aspirant
+
+### Skills
+
+* Python
+* SQL
+* Power BI
+* Machine Learning
+* Generative AI
+* Streamlit
+* Prompt Engineering
