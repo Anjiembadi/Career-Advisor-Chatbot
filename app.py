@@ -37,21 +37,23 @@ if user_input:
         st.write(user_input)
 
     with st.chat_message("assistant"):
+
         response_placeholder = st.empty()
-        full_response = ""
+    full_response = ""
+
+    try:
 
         with st.spinner("Thinking..."):
+
             for chunk in client.get_response_stream(
                 user_input,
                 st.session_state.messages
             ):
+
                 full_response += chunk
                 response_placeholder.markdown(full_response)
 
-    st.session_state.messages.append({
-        "role": "assistant",
-        "content": full_response
-    })
+    except Exception as e:
 
-    logger.info(f"User: {user_input}")
-    logger.info(f"Bot: {full_response}")
+        full_response = f"Error: {str(e)}"
+        response_placeholder.error(full_response)
